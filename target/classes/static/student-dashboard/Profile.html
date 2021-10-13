@@ -1,0 +1,165 @@
+<!Doctype HTML>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div id="mySidenav" class="sidenav">
+		<p class="logo" id="logo">
+			<h6 align="center">Learning-Management System</h6>
+		</p>
+		<a href="#" class="icon-a"><i class="fa fa-user icons"></i>
+			&nbsp;&nbsp;Profile</a>
+		 <a href="#" class="icon-a"><i
+			class="fa fa-users icons"></i> &nbsp;&nbsp;My progress Report </a> <a href="#"
+			class="icon-a"><i class="fa fa-list icons"></i>
+			&nbsp;&nbsp;Assessments</a> <a href="#" class="icon-a"><i
+			class="fa fa-shopping-bag icons"></i> &nbsp;&nbsp;My Courses</a> <a href="#"
+			class="icon-a"><i class="fa fa-tasks icons"></i> &nbsp;&nbsp;Help & Support</a>  <a href="#" onClick="logout()" class="icon-a"><i
+			class="fa fa-list-alt icons"></i> &nbsp;&nbsp;Sign Out</a>
+	</div>
+	<div id="main">
+
+		<div class="head">
+			<div class="col-div-6">
+				<span style="font-size: 30px; cursor: pointer; color: white;"
+					class="nav">&#9776; Profile</span> <span
+					style="font-size: 30px; cursor: pointer; color: white;"
+					class="nav2">&#9776; Profile</span>
+			</div>
+
+			<div class="col-div-6">
+				<div class="profile">
+
+					<img src="images/admin.png" class="pro-img" />
+					<p id="displayEmail"></p>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+
+		<div class="clearfix"></div>
+		<br />
+	
+		<div class="clearfix"></div>
+		<br />
+		<br />
+		<div class="col-div-8">
+			<div class="box-8">
+				<div class="content-box">
+					<p>
+						My Profile <span>0</span>
+					</p>
+					<br />
+					<div align="center">
+					<form >
+					<div class="input-field">
+                        <input disabled placeholder="Student Id" id="id" name="student_id" type="number" class="validate">
+                    </div><br/>
+					 <div class="input-field">
+                        <input placeholder="Student Name" id="name" name="student_name" type="text" class="validate">
+                    </div><br/>
+                    <div class="input-field">
+                        <input placeholder="Email" id="email" name="email" type="text" class="validate">
+                    </div><br/>
+                    <div class="input-field">
+                        <input placeholder="Mobile" id="mobile" name="mobile" type="text" class="validate">
+                    </div><br/>
+                    <div class="input-field">
+                        <input placeholder="Address" id="address" name="address" type="text" class="validate">
+                    </div><br/>
+                    
+                    <div class="text-right mt-4">
+                        <button id="editProfile" onClick="submitDetails()"type="button" class="waves-effect btn-large btn-large-white px-4 black-text">Save Details</button><br>
+                      </div>
+                      </form>
+                    </div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="clearfix"></div>
+	</div>
+
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(".nav").click(function() {
+			$("#mySidenav").css('width', '70px');
+			$("#main").css('margin-left', '70px');
+			$(".logo").css('visibility', 'hidden');
+			$(".logo span").css('visibility', 'visible');
+			$(".logo span").css('margin-left', '-10px');
+			$(".icon-a").css('visibility', 'hidden');
+			$(".icons").css('visibility', 'visible');
+			$(".icons").css('margin-left', '-8px');
+			$(".nav").css('display', 'none');
+			$(".nav2").css('display', 'block');
+		});
+
+		$(".nav2").click(function() {
+			$("#mySidenav").css('width', '300px');
+			$("#main").css('margin-left', '300px');
+			$(".logo").css('visibility', 'visible');
+			$(".icon-a").css('visibility', 'visible');
+			$(".icons").css('visibility', 'visible');
+			$(".nav").css('display', 'block');
+			$(".nav2").css('display', 'none');
+		});
+	</script>
+<script>
+if(sessionStorage.getItem("email")==null){
+	location='/Users/Real/Documents/workspace-sts-3.9.5.RELEASE/learning-managment-system/src/main/resources/static/homepage/login%26Register/Student_login.html';
+}
+document.getElementById('displayEmail').innerHTML=sessionStorage.getItem("email");
+
+function logout(){
+	sessionStorage.removeItem('email')
+	location='/Users/Real/Documents/workspace-sts-3.9.5.RELEASE/learning-managment-system/src/main/resources/static/homepage/login%26Register/Student_login.html';
+}
+function submitDetails(){
+	
+	$.ajax({
+		type: "PATCH",
+		contentType: "application/json; charset=utf-8",
+		url: "http://localhost:8080/api/student/updated/"+document.getElementById('id').value,
+		data: JSON.stringify({'studentName': document.getElementById('name').value,'email':document.getElementById('email').value,'address':document.getElementById('address').value,'mobileNo':document.getElementById('mobileNo').value,'dateOfBirth':document.getElementById('dateOfBirth').value}),
+		cache: false,
+		success: function(result) {
+			window.alert("Details are updated !");
+		},
+		error: function(err) {
+				window.alert(err);
+		}
+	});
+	
+	};
+
+	$.ajax({
+		type: "GET",
+		contentType: "application/json; charset=utf-8",
+		url: "http://localhost:8080/api/student/getByEmail/"+sessionStorage.getItem('email'),
+		cache: false,
+		success: function(result) {
+		
+			document.getElementById('id').value=result[0].sid
+			document.getElementById('name').value=result[0].studentName
+			document.getElementById('email').value=result[0].email
+			document.getElementById('mobile').value=result[0].mobileNo
+			document.getElementById('address').value=result[0].address
+		    documnet.getElementById('dateOfBirth').value=result[0].dateOfBirth
+		},
+		error: function(err) {
+				window.alert("Details are not saved !");
+		}
+	});
+	
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,264 @@
+<!Doctype HTML>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div id="mySidenav" class="sidenav">
+		<p class="logo" id="logo">
+		<h6 align="center">Learning-Management System</h6>
+		</p>
+		<a
+			href="/Users/Real/Documents/workspace-sts-3.9.5.RELEASE/learning-managment-system/src/main/resources/static/faculty-dashboard/Profile.html#"
+			class="icon-a"><i class="fa fa-user icons"></i>
+			&nbsp;&nbsp;Profile</a> <a href="#" class="icon-a"><i
+			class="fa fa-users icons"></i> &nbsp;&nbsp;Discussion chat </a> <a
+			href="#" class="icon-a"><i class="fa fa-list icons"></i>
+			&nbsp;&nbsp;Enrolled Students</a> <a
+			href="/Users/Real/Documents/workspace-sts-3.9.5.RELEASE/learning-managment-system/src/main/resources/static/faculty-dashboard/ViewCourse.html"
+			class="icon-a"><i class="fa fa-shopping-bag icons"></i>
+			&nbsp;&nbsp;View Courses</a> <a href="#" class="icon-a"><i
+			class="fa fa-tasks icons"></i> &nbsp;&nbsp;Upload Assessment</a> <a
+			href="#" onClick="logout()" class="icon-a"><i
+			class="fa fa-list-alt icons"></i> &nbsp;&nbsp;Sign Out</a>
+	</div>
+	<div id="main">
+
+		<div class="head">
+			<div class="col-div-6">
+				<span style="font-size: 30px; cursor: pointer; color: white;"
+					class="nav">&#9776; Profile</span> <span
+					style="font-size: 30px; cursor: pointer; color: white;"
+					class="nav2">&#9776; Profile</span>
+			</div>
+
+			<div class="col-div-6">
+				<div class="profile">
+
+					<img src="images/admin.png" class="pro-img" />
+					<p id="displayEmail"></p>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+
+		<div class="clearfix"></div>
+		<br />
+
+
+
+		<div class="clearfix"></div>
+		<br /> <br />
+		<div class="col-div-8">
+			<div class="box-8">
+				<div class="content-box">
+					<p>
+						My Courses 
+					</p>
+					<br />
+					<div align="center">
+						<form>
+							<div class="input-field">
+								<input disabled placeholder="Course Id" id="id" name="course_id"
+									type="number" class="validate">
+							</div>
+							<br />
+							<div class="input-field">
+								<input placeholder="Course Name" id="name" name="Course_name"
+									type="text" class="validate">
+							</div>
+							<br />
+							<div class="input-field">
+								<input placeholder="Duration" id="duration" name="email"
+									type="text" class="validate">
+							</div>
+							<br />
+							<div class="input-field">
+								<input placeholder="Price" id="price" name="price" type="text"
+									class="validate">
+							</div>
+							<br />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="clearfix"></div>
+	</div>
+
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(".nav").click(function() {
+			$("#mySidenav").css('width', '70px');
+			$("#main").css('margin-left', '70px');
+			$(".logo").css('visibility', 'hidden');
+			$(".logo span").css('visibility', 'visible');
+			$(".logo span").css('margin-left', '-10px');
+			$(".icon-a").css('visibility', 'hidden');
+			$(".icons").css('visibility', 'visible');
+			$(".icons").css('margin-left', '-8px');
+			$(".nav").css('display', 'none');
+			$(".nav2").css('display', 'block');
+		});
+
+		$(".nav2").click(function() {
+			$("#mySidenav").css('width', '300px');
+			$("#main").css('margin-left', '300px');
+			$(".logo").css('visibility', 'visible');
+			$(".icon-a").css('visibility', 'visible');
+			$(".icons").css('visibility', 'visible');
+			$(".nav").css('display', 'block');
+			$(".nav2").css('display', 'none');
+		});
+	</script>
+	<script>
+if(sessionStorage.getItem("email")==null){
+	location='/Users/Real/Documents/workspace-sts-3.9.5.RELEASE/learning-managment-system/src/main/resources/static/homepage/login%26Register/Faculty_login.html';
+}
+document.getElementById('displayEmail').innerHTML=sessionStorage.getItem("email");
+
+function logout(){
+	sessionStorage.removeItem('email')
+	location='/Users/Real/Documents/workspace-sts-3.9.5.RELEASE/learning-managment-system/src/main/resources/static/homepage/login%26Register/Faculty_login.html';
+}
+
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+			$.getJSON('http://localhost:8085/api/course/get', function (json) {
+				var tr = [];
+
+				for (var i = 0; i < json.length; i++) {
+
+					tr.push('<tr>');
+					tr.push('<td>' + json[i].cid + '</td>');
+					tr.push('<td>' + json[i].courseName + '</td>');
+					tr.push('<td>' + json[i].duration + '</td>');
+					tr.push('<td>' + json[i].price + '</td>');
+					tr.push('<td><button class=\'edit\'>Update</button>&nbsp;&nbsp;<button class=\'delete\' id=' + json[i].id + '>Delete</button></td>');
+					tr.push('</tr>');
+				}
+
+				$('table').append($(tr.join('')));
+			});
+
+			$(document).delegate('#addNew', 'click', function (event) {
+				event.preventDefault();
+
+				var name = $('#name').val();
+				var duration = $('#duration').val();
+				var price = $('#price').val();
+
+
+				$.ajax({
+					type: "POST",
+					contentType: "application/json; charset=utf-8",
+					url: "http://localhost:8085/api/course/insert",
+					data: JSON.stringify({'courseName': name, 'duration': duration, 'price': price}),
+					cache: false,
+					success: function (result) {
+						$("#msg").html("<span style='color: green'>Course added successfully</span>");
+						window.setTimeout(function () {location.reload()}, 500)
+					},
+					error: function (err) {
+						$("#msg").html("<span style='color: red'>Name is required</span>");
+					}
+				});
+			});
+
+			$(document).delegate('.delete', 'click', function () {
+				if (confirm('Do you really want to delete record?')) {
+					var id = $(this).attr('id');
+					var parent = $(this).parent().parent();
+					$.ajax({
+						type: "DELETE",
+						url: "http://localhost:8085/api/course/delete/" + id,
+						cache: false,
+						success: function () {
+							parent.fadeOut('slow', function () {
+								$(this).remove();
+							});
+							location.reload(true)
+						},
+						error: function () {
+							$('#err').html('<span style=\'color:red; font-weight: bold; font-size: 30px;\'>Error deleting record').fadeIn().fadeOut(4000, function () {
+								$(this).remove();
+							});
+						}
+					});
+				}
+			});
+
+			$(document).delegate('.edit', 'click', function () {
+				var parent = $(this).parent().parent();
+
+				var id = parent.children("td:nth-child(1)");
+				var name = parent.children("td:nth-child(2)");
+				var duration = parent.children("td:nth-child(3)");
+				var price = parent.children("td:nth-child(4)");
+				var buttons = parent.children("td:nth-child(5)");
+
+				name.html("<input type='text' id='txtName' value='" + name.html() + "'/>");
+				duration.html("<input type='text' id='txtName' value='" + duration.html() + "'/>");
+				price.html("<input type='text' id='txtName' value='" + price.html() + "'/>");
+				buttons.html("<button id='save'>Save</button>&nbsp;&nbsp;<button class='delete' id='" + id.html() + "'>Delete</button>");
+			});
+
+			$(document).delegate('#save', 'click', function () {
+				var parent = $(this).parent().parent();
+
+				var id = parent.children("td:nth-child(1)");
+				var name = parent.children("td:nth-child(2)");
+				var duration = parent.children("td:nth-child(3)");
+				var price = parent.children("td:nth-child(4)");
+				var buttons = parent.children("td:nth-child(5)");
+
+
+				$.ajax({
+					type: "POST",
+					contentType: "application/json; charset=utf-8",
+					url: "http://localhost:8080/api/course/insert",
+					data: JSON.stringify({'id': id.html(), 'courseName': name.children("input[type=text]").val(), 'duration': duration.children("input[type=text]").val(), 'price': price.children("input[type=text]").val()}),
+					cache: false,
+					success: function () {
+						name.html(name.children("input[type=text]").val());
+						salary.html(salary.children("input[type=text]").val());
+						doj.html(doj.children("input[type=text]").val());
+						buttons.html("<button class='edit' id='" + id.html() + "'>Edit</button>&nbsp;&nbsp;<button class='delete' id='" + id.html() + "'>Delete</button>");
+					},
+					error: function () {
+						$('#err').html('<span style=\'color:red; font-weight: bold; font-size: 30px;\'>Error updating record').fadeIn().fadeOut(4000, function () {
+							$(this).remove();
+						});
+					}
+				});
+			});
+
+		});
+		$.ajax({
+			type: "GET",
+			contentType: "application/json; charset=utf-8",
+			url: "http://localhost:8080/api/course/"+sessionStorage.getItem('email'),
+			cache: false,
+			success: function(result) {
+				document.getElementById('id').value=result[0].fid
+				document.getElementById('name').value=result[0].facultyName
+				document.getElementById('email').value=result[0].email
+				document.getElementById('mobile').value=result[0].mobile
+				document.getElementById('address').value=result[0].address
+			},
+			error: function(err) {
+					window.alert("Details are not saved !");
+			}
+		});
+		</script>
+</body>
+
+</html>

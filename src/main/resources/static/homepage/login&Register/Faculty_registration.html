@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Faculty Register - LMS</title>
+	<!--
+    Template 2105 Input
+	http://www.tooplate.com/view/2105-input
+	-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/tooplate.css">
+</head>
+
+<body id="register">
+    <div class="container">
+        <div class="row tm-register-row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 tm-register-col-l">
+                <form action="" method="post">
+                    
+
+                    <div class="input-field">
+                        <input placeholder="Faculty Name" id="name" name="faculty_name" type="text" class="validate">
+                    </div>
+                    <div class="input-field">
+                        <input placeholder="Email" id="email" name="email" type="text" class="validate">
+                    </div>
+                    <div class="input-field">
+                        <input placeholder="Password" id="password" name="password" type="password" class="validate">
+                    </div>
+                    <div class="input-field">
+                        <input placeholder="Mobile" id="mobile" name="mobile" type="text" class="validate">
+                    </div>
+                    <div class="input-field">
+                        <input placeholder="Address" id="address" name="address" type="text" class="validate">
+                    </div>
+                    
+                    <div class="text-right mt-4">
+                        <button id="reg" type="submit" class="waves-effect btn-large btn-large-white px-4 black-text">REGISTER</button><br>
+                       <a href="Faculty_login.html">Already Have account?</a>
+                    
+                    </div>
+                </form>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 tm-register-col-r">
+                <header class="mb-5">
+                    <h3 class="mt-0 text-white">REGISTER Yourself</h3>
+                    <p class="grey-text">Faculty registration form.</p>
+                    <p class="grey-text">Fill the details.
+                    </p>
+                </header>
+
+            </div>
+        </div>
+        <footer class="row tm-mt-big mb-3">
+            <div class="col-xl-12">
+                <p class="text-center grey-text text-lighten-2 tm-footer-text-small">
+                    Copyright &copy; 2021 Learning Management System 
+                    
+                   </p>
+            </div>
+        </footer>
+    </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+   
+    <script src="js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('select').formSelect();
+        });
+    </script>
+    <script type="text/javascript">
+
+		$(document).delegate('#reg', 'click', function(event) {
+				event.preventDefault();
+				
+				var facultyName = $('#name').val();
+				var email = $('#email').val();
+				var password = $('#password').val();
+				var mobile = $('#mobile').val();
+				var address = $('#address').val();
+				
+				$.ajax({
+					type: "POST",
+					contentType: "application/json; charset=utf-8",
+					url: "http://localhost:8080/api/faculty/registration",
+					data: JSON.stringify({'facultyName': facultyName,'email':email,'password':password,'address':address,'mobile':mobile}),
+					cache: false,
+					success: function(result) {
+						window.alert("Registered Successfully");
+					},
+					error: function(err) {
+							window.alert("Not Registered");
+					}
+				});
+			});
+	
+	</script>
+</body>
+
+</html>

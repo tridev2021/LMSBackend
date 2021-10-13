@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login Form by Tooplate</title>
+	<!--
+    Template 2105 Input
+	http://www.tooplate.com/view/2105-input
+	-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/tooplate.css">
+</head>
+
+<body id="login">
+    <div class="container">
+        <div class="row tm-register-row tm-mb-35">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 tm-login-l">
+                <form action="" method="post" class="tm-bg-black p-5 h-100">
+                    <div class="input-field">
+                        <input placeholder="Email" id="email" name="email" type="text" class="validate">
+                    </div>
+                    <div class="input-field mb-5">
+                        <input placeholder="Password" id="password" name="password" type="password" class="validate">
+                    </div>
+                    <div class="tm-flex-lr">
+                        <a href="#" class="white-text small">Forgot Password?</a>
+                        <button id="logins" type="button" class="waves-effect btn-large btn-large-white px-4 black-text rounded-0">Login</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 tm-login-r">
+                <header class="font-weight-light tm-bg-black p-5 h-100">
+                    <h3 class="mt-0 text-white font-weight-light">Faculty Login</h3>
+                    <p>Please login for further actions.</p>
+                    <p class="mb-0">If you don't have an account ,please register yourself for the below link.</p>
+                    </header>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 ml-auto mr-0 text-center">
+                <a href="Faculty_registration.html" class="waves-effect btn-large btn-large-white px-4 black-text rounded-0">Create New Account</a>
+            </div>
+        </div>
+        <footer class="row tm-mt-big mb-3">
+            <div class="col-xl-12 text-center">
+                <p class="d-inline-block tm-bg-black white-text py-2 tm-px-5">
+                    Copyright &copy; 2021 Learning Management System 
+                    
+                    </p>
+            </div>
+        </footer>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+   
+    <script src="js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('select').formSelect();
+        });
+    </script>
+    
+     <script type="text/javascript">
+
+		$(document).delegate('#logins', 'click', function(event) {
+				event.preventDefault();
+				
+				var email = $('#email').val();
+				var password = $('#password').val();
+
+				
+				$.ajax({
+					type: "POST",
+					contentType: "application/json; charset=utf-8",
+					url: "http://localhost:8080/api/faculty/login",
+					data: JSON.stringify({'email':email,'password':password}),
+					cache: false,
+					success: function(result) {
+						if(result=="Login Successfully"){
+							sessionStorage.setItem("email", email);
+							location='/Users/Real/Documents/workspace-sts-3.9.5.RELEASE/learning-managment-system/src/main/resources/static/faculty-dashboard/faculty.html'
+						}
+						else{
+							window.alert("Email or Password is Incorrect")
+						}
+						
+					},
+					error: function(err) {
+							window.alert("Something Went Wrong");
+					}
+				});
+			});
+	
+	</script>
+    
+</body>
+
+</html>

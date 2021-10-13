@@ -1,0 +1,182 @@
+<!Doctype HTML>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div id="mySidenav" class="sidenav">
+		<p class="logo" id="logo">
+			<h6 align="center">Learning-Management System</h6>
+		</p>
+		<a href="#" class="icon-a"><i class="fa fa-user icons"></i>
+			&nbsp;&nbsp;Profile</a>
+		 <a href="#" class="icon-a"><i
+			class="fa fa-users icons"></i> &nbsp;&nbsp;Faculty</a> <a href="#"
+			class="icon-a"><i class="fa fa-list icons"></i>
+			&nbsp;&nbsp;Students</a> <a href="#" class="icon-a"><i
+			class="fa fa-shopping-bag icons"></i> &nbsp;&nbsp;Courses</a> <a href="#"
+			class="icon-a"><i class="fa fa-tasks icons"></i> &nbsp;&nbsp;Add
+			Courses</a>  <a href="#" class="icon-a"><i
+			class="fa fa-list-alt icons"></i> &nbsp;&nbsp;Sign Out</a>
+	</div>
+	<div id="main">
+
+		<div class="head">
+			<div class="col-div-6">
+				<span style="font-size: 30px; cursor: pointer; color: white;"
+					class="nav">&#9776; Dashboard</span> <span
+					style="font-size: 30px; cursor: pointer; color: white;"
+					class="nav2">&#9776; Dashboard</span>
+			</div>
+
+			<div class="col-div-6">
+				<div class="profile">
+
+					<img src="images/admin.png" class="pro-img" />
+					<p>Admin</p>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+
+		<div class="clearfix"></div>
+		<br />
+
+		<div class="col-div-3">
+			<div class="box">
+				<p>
+					15<br />
+					<span>Faculty</span>
+				</p>
+				<i class="fa fa-users box-icon"></i>
+			</div>
+		</div>
+		<div class="col-div-3">
+			<div class="box">
+				<p>
+					10<br />
+					<span>Students</span>
+				</p>
+				<i class="fa fa-list box-icon"></i>
+			</div>
+		</div>
+		<div class="col-div-3">
+			<div class="box">
+				<p>
+					5<br />
+					<span>Courses</span>
+				</p>
+				<i class="fa fa-shopping-bag box-icon"></i>
+			</div>
+		</div>
+		<div class="col-div-3">
+			<div class="box">
+				<p>
+					50<br />
+					<span>Registered </span>
+				</p>
+				<i class="fa fa-tasks box-icon"></i>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<br />
+		<br />
+		<div class="col-div-8">
+			<div class="box-8">
+				<div class="content-box">
+					<p>
+						Top Courses <span>Sell All</span>
+					</p>
+					<br />
+					<table>
+						<tr>
+							<th>Courses</th>
+							<th>Duration</th>
+							<th>Faculty Assigned</th>
+						</tr>
+						<tr>
+							<td>Core Java</td>
+							<td>1 Months</td>
+							<td>Mr.Joe</td>
+						</tr>
+						<tr>
+							<td>Advanced Java</td>
+							<td>1.5 Months</td>
+							<td>Miss.Gilbert</td>
+						</tr>
+						<tr>
+							<td>Spring</td>
+							<td>2 Months</td>
+							<td>Mr.Stefan</td>
+						</tr>
+						<tr>
+							<td>Full Stack Mern Developer</td>
+							<td>6 Months</td>
+							<td>Miss Carla</td>
+						</tr>
+
+
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-div-4">
+			<div class="box-4">
+				<div class="content-box">
+					<p>
+						Total Registration <span>Sell All</span>
+					</p>
+
+					<div class="circle-wrap">
+						<div class="circle">
+							<div class="mask full">
+								<div class="fill"></div>
+							</div>
+							<div class="mask half">
+								<div class="fill"></div>
+							</div>
+							<div class="inside-circle">25%</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+	</div>
+
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(".nav").click(function() {
+			$("#mySidenav").css('width', '70px');
+			$("#main").css('margin-left', '70px');
+			$(".logo").css('visibility', 'hidden');
+			$(".logo span").css('visibility', 'visible');
+			$(".logo span").css('margin-left', '-10px');
+			$(".icon-a").css('visibility', 'hidden');
+			$(".icons").css('visibility', 'visible');
+			$(".icons").css('margin-left', '-8px');
+			$(".nav").css('display', 'none');
+			$(".nav2").css('display', 'block');
+		});
+
+		$(".nav2").click(function() {
+			$("#mySidenav").css('width', '300px');
+			$("#main").css('margin-left', '300px');
+			$(".logo").css('visibility', 'visible');
+			$(".icon-a").css('visibility', 'visible');
+			$(".icons").css('visibility', 'visible');
+			$(".nav").css('display', 'block');
+			$(".nav2").css('display', 'none');
+		});
+	</script>
+
+</body>
+
+</html>

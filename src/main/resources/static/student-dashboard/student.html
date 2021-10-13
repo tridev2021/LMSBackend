@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div id="mySidenav" class="sidenav">
+		<p class="logo" id="logo">
+			<h6 align="center">Learning-Management System</h6>
+		</p>
+		<a href="#" class="icon-a"><i class="fa fa-user icons"></i>
+			&nbsp;&nbsp;Profile</a>
+		 <a href="#" class="icon-a"><i
+			class="fa fa-users icons"></i> &nbsp;&nbsp;My progress Report </a> <a href="#"
+			class="icon-a"><i class="fa fa-list icons"></i>
+			&nbsp;&nbsp;Assessments</a> <a href="#" class="icon-a"><i
+			class="fa fa-shopping-bag icons"></i> &nbsp;&nbsp;My Courses</a> <a href="#"
+			class="icon-a"><i class="fa fa-tasks icons"></i> &nbsp;&nbsp;Help & Support</a>  <a href="#" onClick="logout()" class="icon-a"><i
+			class="fa fa-list-alt icons"></i> &nbsp;&nbsp;Sign Out</a>
+	</div>
+
+	<div id="main">
+
+		<div class="head">
+			<div class="col-div-6">
+				<span style="font-size: 30px; cursor: pointer; color: black;"
+					class="nav">&#9776; Dashboard</span>
+			</div>
+
+			<div class="col-div-6">
+				<div class="profile">
+
+					<img src="images/logo.png" class="pro-img" />
+
+					<h6 align="center">Learning-Management System</h6>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+
+		<div class="clearfix"></div>
+		<br />
+
+		<div class="col-div-3">
+			<div class="box">
+				<p>
+					<br /> <span>Weekly Activity</span>
+				</p>
+				<i class="fa fa-stack-exchange"></i>
+			</div>
+		</div>
+
+		<div class="card mb-3" style="max-width: 540px;">
+			<div class="row g-0">
+				<div class="col-md-4">
+					<img src="..." class="img-fluid rounded-start" alt="...">
+				</div>
+
+			</div>
+
+			<div class="col-md-8">
+				<div class="circle-wrap">
+					<div class="circle">
+						<div class="mask full">
+							<div class="fill"></div>
+						</div>
+						<div class="mask half">
+							<div class="fill"></div>
+						</div>
+						<div class="inside-circle">55%</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">Core Java</h5>
+					<p class="card-text">This is a wider card with supporting text
+						below as a natural lead-in to additional content. This content is
+						a little bit longer.</p>
+					<p class="card-text">
+						<small class="text-muted">Course Duration 3 Months </small>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(".nav").click(function() {
+			$("#mySidenav").css('width', '70px');
+			$("#main").css('margin-left', '70px');
+			$(".logo").css('visibility', 'hidden');
+			$(".logo span").css('visibility', 'visible');
+			$(".logo span").css('margin-left', '-10px');
+			$(".icon-a").css('visibility', 'hidden');
+			$(".icons").css('visibility', 'visible');
+			$(".icons").css('margin-left', '-8px');
+			$(".nav").css('display', 'none');
+			$(".nav2").css('display', 'block');
+		});
+
+		$(".nav2").click(function() {
+			$("#mySidenav").css('width', '300px');
+			$("#main").css('margin-left', '300px');
+			$(".logo").css('visibility', 'visible');
+			$(".icon-a").css('visibility', 'visible');
+			$(".icons").css('visibility', 'visible');
+			$(".nav").css('display', 'block');
+			$(".nav2").css('display', 'none');
+		});
+	</script>
+	
+	<script>
+       if(sessionStorage.getItem("email")==null){
+	        location='/Users/Real/Documents/workspace-sts-3.9.5.RELEASE/learning-managment-system/src/main/resources/static/homepage/login%26Register/Student_login.html';
+          }
+       document.getElementById('displayEmail').innerHTML=sessionStorage.getItem("email");
+
+       function logout(){
+	      sessionStorage.removeItem('email')
+	      location='/Users/Real/Documents/workspace-sts-3.9.5.RELEASE/learning-managment-system/src/main/resources/static/homepage/login%26Register/Student_login.html';
+           }
+
+</script>
+
+</body>
+</html>
