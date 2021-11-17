@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Hp
+Build-Jdk: 16.0.1
+Implementation-Title: learning-management-system
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.lms
+Implementation-URL: https://spring.io/projects/spring-boot/learning-mana
+ gement-system
+Created-By: Maven Integration for Eclipse
+
